@@ -1,6 +1,8 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import InputField from "../../components/InputField";
+import CheckboxField from "../../components/CheckboxField";
 
 const SignInPage = () => {
   return (
@@ -15,39 +17,16 @@ const SignInPage = () => {
             <h1 className="h4 text-gray-900 mb-4">Bienvenido!</h1>
           </div>
           <form className="">
-            <div className="form-floating mb-3">
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                placeholder="Correo electronico"
-              />
-              <label htmlFor="email">Correo electronico</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                placeholder="Contraseña"
-              />
-              <label htmlFor="email">Contraseña</label>
-            </div>
+            <InputField id="email" type="email" label="Correo electronico" />
 
-            <div className="mb-3 form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value=""
-                id="rememberMe"
-              />
-              <label className="form-check-label" htmlFor="rememberMe">
-                Recordarme
-              </label>
-            </div>
+            <InputField id="password" type="password" label="Contraseña" />
+
+            <CheckboxField id="rememberMe" label="Recordarme" />
 
             <div className="mb-3">
-              <button className="btn btn-primary w-100">Ingresar</button>
+              <button type="submit" className="btn btn-primary w-100">
+                Ingresar
+              </button>
             </div>
           </form>
           <hr />
