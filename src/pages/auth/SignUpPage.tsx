@@ -1,8 +1,32 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import InputField from "../../components/InputField";
+import CheckboxField from "../../components/CheckboxField";
 
 const SignUpPage = () => {
+  const { values, handleChange, handleBlur, handleSubmit, errors, touched } =
+    useFormik({
+      initialValues: {
+        firtsName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        terms: false,
+      },
+      validationSchema: Yup.object({
+        firtsName: Yup.string().min(3).required(),
+        lastName: Yup.string(),
+        email: Yup.string().email().required(),
+        password: Yup.string().min(6).required(),
+        terms: Yup.boolean().isTrue(),
+      }),
+      onSubmit: (form) => {
+        console.log(form);
+      },
+    });
   return (
     <React.Fragment>
       <Helmet>
@@ -14,55 +38,58 @@ const SignUpPage = () => {
           <div className="text-center">
             <h1 className="h4 text-gray-900 mb-4">Crear una cuenta!</h1>
           </div>
-          <form className="">
-            <div className="form-floating mb-3">
-              <input
-                type="text"
-                className="form-control"
-                id="firtsName"
-                placeholder="Nombres"
-              />
-              <label htmlFor="firtsName">Nombres</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input
-                type="text"
-                className="form-control"
-                id="lastName"
-                placeholder="Apellidos"
-              />
-              <label htmlFor="lastName">Apellidos</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                placeholder="Correo electronico"
-              />
-              <label htmlFor="email">Correo electronico</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                placeholder="Contraseña"
-              />
-              <label htmlFor="email">Contaseña</label>
-            </div>
+          <form className="" onSubmit={handleSubmit}>
+            <InputField
+              id="firtsName"
+              value={values.firtsName}
+              label="Nombres"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              errors={errors}
+              touched={touched}
+            />
 
-            <div className="mb-3 form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value=""
-                id="terms"
-              />
-              <label className="form-check-label" htmlFor="terms">
-                Acepto los terminos y condiciones.
-              </label>
-            </div>
+            <InputField
+              id="lastName"
+              value={values.lastName}
+              label="Apellidos"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              errors={errors}
+              touched={touched}
+            />
+
+            <InputField
+              id="email"
+              type="email"
+              value={values.email}
+              label="Correo electronico"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              errors={errors}
+              touched={touched}
+            />
+
+            <InputField
+              id="password"
+              type="password"
+              value={values.password}
+              label="Contraseña"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              errors={errors}
+              touched={touched}
+            />
+
+            <CheckboxField
+              id="terms"
+              label="Acepto los terminos y condiciones."
+              value={values.terms}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              errors={errors}
+              touched={touched}
+            />
 
             <div className="mb-3">
               <button className="btn btn-primary w-100">Registrarme</button>
