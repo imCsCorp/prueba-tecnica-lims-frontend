@@ -4,7 +4,9 @@ import { Outlet } from "react-router-dom";
 const AppLayout = () => {
   return (
     <React.Fragment>
-      <Outlet />
+      <div className="bg-light vw-100 vh-100 pt-0 d-flex justify-content-center align-items-center">
+        <Outlet />
+      </div>
     </React.Fragment>
   );
 };
