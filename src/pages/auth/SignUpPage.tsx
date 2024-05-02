@@ -72,7 +72,7 @@ const SignUpPage = () => {
           <div className="text-center">
             <p>
               Ya tienes cuenta{" "}
-              <Link className="small" to="/auth/sign-up">
+              <Link className="small" to="/auth/sign-in">
                 ingresa aqui
               </Link>
             </p>

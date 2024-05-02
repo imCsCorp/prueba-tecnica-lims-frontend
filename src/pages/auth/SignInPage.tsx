@@ -14,24 +14,24 @@ const SignInPage = () => {
           <div className="text-center">
             <h1 className="h4 text-gray-900 mb-4">Bienvenido!</h1>
           </div>
-          <form className="user">
+          <form className="">
             <div className="form-floating mb-3">
               <input
                 type="email"
                 className="form-control"
                 id="email"
-                placeholder="Email"
+                placeholder="Correo electronico"
               />
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">Correo electronico</label>
             </div>
             <div className="form-floating mb-3">
               <input
                 type="password"
                 className="form-control"
                 id="password"
-                placeholder="Password"
+                placeholder="Contraseña"
               />
-              <label htmlFor="email">Password</label>
+              <label htmlFor="email">Contraseña</label>
             </div>
 
             <div className="mb-3 form-check">
@@ -42,24 +42,27 @@ const SignInPage = () => {
                 id="rememberMe"
               />
               <label className="form-check-label" htmlFor="rememberMe">
-                Remember me
+                Recordarme
               </label>
             </div>
 
             <div className="mb-3">
-              <button className="btn btn-primary w-100">Enter</button>
+              <button className="btn btn-primary w-100">Ingresar</button>
             </div>
           </form>
           <hr />
           <div className="text-center">
             <Link className="small" to="/auth/forgot-password">
-              Forgot Password?
+              Olvide mi contraseña?
             </Link>
           </div>
           <div className="text-center">
-            <Link className="small" to="/auth/sign-up">
-              Create an Account!
-            </Link>
+            <p>
+              No tengo cuenta y quiero{" "}
+              <Link className="small" to="/auth/sign-up">
+                crear una.
+              </Link>
+            </p>
           </div>
         </div>
       </div>
