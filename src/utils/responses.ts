@@ -61,3 +61,39 @@ export const signUpSuccess = (
     setSignIn(token);
   });
 };
+
+export const isLogout = (setLogout: () => void) => {
+  Swal.fire({
+    icon: "warning",
+    title: "Quieres cerrar sesión",
+    confirmButtonColor: "#198754",
+    confirmButtonText: "Si",
+    showCancelButton: true,
+    cancelButtonColor: "#dc3545",
+    cancelButtonText: "No",
+  }).then((res) => {
+    if (res.isConfirmed) {
+      logOutSi().then(() => {
+        setLogout();
+      });
+    } else {
+      logOutNo();
+    }
+  });
+};
+
+export const logOutNo = () => {
+  return Swal.fire({
+    icon: "success",
+    title: "Accion cancelada",
+    confirmButtonColor: "#0a58ca",
+  });
+};
+
+export const logOutSi = () => {
+  return Swal.fire({
+    icon: "success",
+    title: "Vuelve pronto",
+    confirmButtonColor: "#0a58ca",
+  });
+};

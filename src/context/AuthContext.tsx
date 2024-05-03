@@ -13,6 +13,9 @@ export const authReducer = (state: AuthState, action: AuthAction) => {
   switch (action.type) {
     case "[AUTH] SIGN IN":
       return { ...state, auth: true };
+
+    case "[AUTH] SIGN OUT":
+      return { ...state, auth: false };
     default:
       return state;
   }
