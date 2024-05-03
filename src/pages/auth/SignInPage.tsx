@@ -6,6 +6,7 @@ import * as Yup from "yup";
 
 import CheckboxField from "../../components/CheckboxField";
 import InputField from "../../components/InputField";
+import axiosClient from "../../config/axiosClient";
 
 const SignInPage = () => {
   const { values, handleChange, handleBlur, handleSubmit, errors, touched } =
@@ -17,7 +18,14 @@ const SignInPage = () => {
         rememberMe: Yup.boolean(),
       }),
       onSubmit: (form) => {
-        console.log(form);
+        axiosClient
+          .post("auth/login", form)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch(err=>{
+            console.log(err)
+          });
       },
     });
   return (
