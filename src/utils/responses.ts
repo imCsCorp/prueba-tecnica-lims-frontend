@@ -38,7 +38,24 @@ export const signInSuccess = (
     icon: "success",
     title: `Hola ${form.email}`,
     text: " credenciales correctas bienvenido al sistema",
-    confirmButtonText: "Vale",
+    confirmButtonText: "OK",
+    confirmButtonColor: "#0a58ca",
+  }).then(() => {
+    setSignIn(token);
+  });
+};
+
+export const signUpSuccess = (
+  headers: any,
+  form: Record<string, any>,
+  setSignIn: (token: string) => void
+) => {
+  let token = headers.getAuthorization();
+  Swal.fire({
+    icon: "success",
+    title: `Hola ${form.firstName}`,
+    text: "Su registro se genero de manera exitosa en el sistema",
+    confirmButtonText: "OK",
     confirmButtonColor: "#0a58ca",
   }).then(() => {
     setSignIn(token);

@@ -1,30 +1,40 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import InputField from "../../components/InputField";
+
+import { BadRequest, signUpSuccess } from "../../utils/responses";
 import CheckboxField from "../../components/CheckboxField";
+import { AuthContext } from "../../context/AuthContext";
+import InputField from "../../components/InputField";
+import axiosClient from "../../config/axiosClient";
 
 const SignUpPage = () => {
+  const { setSignIn } = useContext(AuthContext);
   const { values, handleChange, handleBlur, handleSubmit, errors, touched } =
     useFormik({
       initialValues: {
-        firtsName: "",
+        firstName: "",
         lastName: "",
         email: "",
         password: "",
         terms: false,
       },
       validationSchema: Yup.object({
-        firtsName: Yup.string().min(3).required(),
+        firstName: Yup.string().min(3).required(),
         lastName: Yup.string(),
         email: Yup.string().email().required(),
         password: Yup.string().min(6).required(),
         terms: Yup.boolean().isTrue(),
       }),
       onSubmit: (form) => {
-        console.log(form);
+        axiosClient
+          .post("auth/register", form)
+          .then(({ headers }) => {
+            signUpSuccess(headers, form, setSignIn);
+          })
+          .catch(BadRequest);
       },
     });
   return (
@@ -40,8 +50,8 @@ const SignUpPage = () => {
           </div>
           <form className="" onSubmit={handleSubmit}>
             <InputField
-              id="firtsName"
-              value={values.firtsName}
+              id="firstName"
+              value={values.firstName}
               label="Nombres"
               handleChange={handleChange}
               handleBlur={handleBlur}
