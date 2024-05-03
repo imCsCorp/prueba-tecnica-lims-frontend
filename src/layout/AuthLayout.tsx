@@ -1,7 +1,18 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useContext, useMemo } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import useAuth from "../hooks/useAuth";
 
 const AuthLayout = () => {
+  const { auth } = useContext(AuthContext);
+  const isAuth: any = useMemo(
+    () => useAuth(localStorage.getItem("token") || ""),
+    [auth]
+  );
+
+  if (isAuth) {
+    return <Navigate to="/" />;
+  }
   return (
     <React.Fragment>
       <div className="bg-light vw-100 vh-100 pt-0 d-flex justify-content-center align-items-center">
