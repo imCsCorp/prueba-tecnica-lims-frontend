@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+import { BadRequest, signInSuccess } from "../../utils/responses";
 import CheckboxField from "../../components/CheckboxField";
 import InputField from "../../components/InputField";
+import { AuthContext } from "../../context/AuthContext";
 import axiosClient from "../../config/axiosClient";
 
 const SignInPage = () => {
+  const { setSignIn } = useContext(AuthContext);
+
   const { values, handleChange, handleBlur, handleSubmit, errors, touched } =
     useFormik({
       initialValues: { email: "", password: "", rememberMe: false },
@@ -20,12 +24,10 @@ const SignInPage = () => {
       onSubmit: (form) => {
         axiosClient
           .post("auth/login", form)
-          .then((res) => {
-            console.log(res);
+          .then(({ headers }) => {
+            signInSuccess(headers, form, setSignIn);
           })
-          .catch(err=>{
-            console.log(err)
-          });
+          .catch(BadRequest);
       },
     });
   return (

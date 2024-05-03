@@ -3,5 +3,5 @@ export interface AuthState {
 }
 
 export type AuthAction =
-  | { type: "[AUTH] SIGN IN"; payload: Record<string, any> }
+  | { type: "[AUTH] SIGN IN" }
   | { type: "[AUTH] SIGN OUT" };
